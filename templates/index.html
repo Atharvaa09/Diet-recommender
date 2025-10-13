@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head><title>Diet Recommender</title></head>
+  <body>
+    <h1>Diet Recommender</h1>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <form action="/recommend" method="post">
+      Age: <input name="age" required><br>
+      Gender: 
+      <select name="gender">
+        <option>Male</option>
+        <option>Female</option>
+      </select><br>
+      Height (cm): <input name="height" required><br>
+      Weight (kg): <input name="weight" required><br>
+      Activity Level: 
+      <select name="activity">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+      </select><br>
+      Goal: 
+      <select name="goal">
+        <option value="weight_loss">Weight Loss</option>
+        <option value="muscle_gain">Muscle Gain</option>
+        <option value="maintain">Maintain</option>
+      </select><br>
+      Food Preference: 
+      <select name="preference">
+        <option>Veg</option>
+        <option>Non-Veg</option>
+        <option>Vegan</option>
+      </select><br>
+      <button type="submit">Get My Diet Plan</button>
+    </form>
+  </body>
+</html>

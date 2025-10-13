@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+  <head><title>Your Diet Result</title></head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <body>
+    <h1>Your Daily Calorie Target</h1>
+    <p>{{ calories }} kcal</p>
+
+    <h2>Recommended Meals ({{ preference }})</h2>
+    <ul>
+      {% for meal in meals %}
+        <li>{{ meal }}</li>
+      {% endfor %}
+    </ul>
+
+    <a href="/">Go Back</a>
+  </body>
+</html>
