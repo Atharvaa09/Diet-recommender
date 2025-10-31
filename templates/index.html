@@ -15,8 +15,7 @@
   <main>
     <div class="form-card enhanced fade-in">
       <h2>Fill Your Details</h2>
-      <form action="/recommend" method="POST">
-
+      <form id="dietForm" action="/recommend" method="POST">
         <div class="form-group">
           <label>Age:</label>
           <input type="number" name="age" placeholder="Enter your age" required>
@@ -76,5 +75,21 @@
   <footer>
     <p>Made with ❤️ by Atharva & Team | PCCOE AIML</p>
   </footer>
+
+  <!-- Loading overlay -->
+  <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <p>🤖 Analyzing your details... Please wait</p>
+  </div>
+
+  <!-- JavaScript for AI loading animation -->
+  <script>
+    const form = document.getElementById('dietForm');
+    const loadingOverlay = document.getElementById('loadingOverlay');
+
+    form.addEventListener('submit', function() {
+      loadingOverlay.style.display = 'flex';
+    });
+  </script>
 </body>
 </html>
