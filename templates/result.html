@@ -9,15 +9,28 @@
 <body>
   <header>
     <h1>🍎 Your Personalized Diet Plan</h1>
-    <p>Based on your preferences and health goals</p>
+    <p>Based on your preferences, BMI, and health goals</p>
   </header>
 
   <main>
-    <div class="result-card">
+    <div class="result-card fade-in">
       <h2>Daily Calorie Requirement</h2>
       <p class="highlight">{{ calories }} kcal</p>
 
+      {% if bmi %}
+      <div class="bmi-box">
+        <p><strong>BMI:</strong> {{ bmi }}</p>
+        <p><strong>Status:</strong> {{ bmi_cat }}</p>
+      </div>
+      {% endif %}
+
       <h3>Food Preference: <span>{{ preference }}</span></h3>
+
+      {% if 'mixed' in preference.lower() %}
+      <p style="color:#e67e22;font-weight:600;">
+        🧩 Balanced diet: Veg + Non-Veg meals planned separately.
+      </p>
+      {% endif %}
 
       <h2>Recommended Meals</h2>
       <div class="meal-list">
