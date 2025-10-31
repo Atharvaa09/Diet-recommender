@@ -1,18 +1,40 @@
-<!doctype html>
-<html>
-  <head><title>Your Diet Result</title></head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Personalized Diet Plan</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  <body>
-    <h1>Your Daily Calorie Target</h1>
-    <p>{{ calories }} kcal</p>
+</head>
+<body>
+  <header>
+    <h1>🍎 Your Personalized Diet Plan</h1>
+    <p>Based on your preferences and health goals</p>
+  </header>
 
-    <h2>Recommended Meals ({{ preference }})</h2>
-    <ul>
-      {% for meal in meals %}
-        <li>{{ meal }}</li>
-      {% endfor %}
-    </ul>
+  <main>
+    <div class="result-card">
+      <h2>Daily Calorie Requirement</h2>
+      <p class="highlight">{{ calories }} kcal</p>
 
-    <a href="/">Go Back</a>
-  </body>
+      <h3>Food Preference: <span>{{ preference }}</span></h3>
+
+      <h2>Recommended Meals</h2>
+      <div class="meal-list">
+        {% for meal in meals %}
+          <div class="meal-item">
+            <span class="meal-emoji">🍽️</span>
+            <p>{{ meal }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <a href="/" class="back-btn">← Go Back</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by Atharva & Team | PCCOE AIML</p>
+  </footer>
+</body>
 </html>

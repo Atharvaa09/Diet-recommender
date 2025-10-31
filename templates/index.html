@@ -1,37 +1,78 @@
-<!doctype html>
-<html>
-  <head><title>Diet Recommender</title></head>
-  <body>
-    <h1>Diet Recommender</h1>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <form action="/recommend" method="post">
-      Age: <input name="age" required><br>
-      Gender: 
-      <select name="gender">
-        <option>Male</option>
-        <option>Female</option>
-      </select><br>
-      Height (cm): <input name="height" required><br>
-      Weight (kg): <input name="weight" required><br>
-      Activity Level: 
-      <select name="activity">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select><br>
-      Goal: 
-      <select name="goal">
-        <option value="weight_loss">Weight Loss</option>
-        <option value="muscle_gain">Muscle Gain</option>
-        <option value="maintain">Maintain</option>
-      </select><br>
-      Food Preference: 
-      <select name="preference">
-        <option>Veg</option>
-        <option>Non-Veg</option>
-        <option>Vegan</option>
-      </select><br>
-      <button type="submit">Get My Diet Plan</button>
-    </form>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diet Recommender | Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header>
+    <h1>🥗 Smart Diet Recommender</h1>
+    <p>AI-powered personalized meal planning for your health goals</p>
+  </header>
+
+  <main>
+    <div class="form-card enhanced">
+      <h2>Fill Your Details</h2>
+      <form action="/recommend" method="POST">
+        <div class="form-group">
+          <label>Age:</label>
+          <input type="number" name="age" placeholder="Enter your age" required>
+        </div>
+
+        <div class="form-group">
+          <label>Gender:</label>
+          <select name="gender" required>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Height (cm):</label>
+          <input type="number" name="height" placeholder="e.g. 170" required>
+        </div>
+
+        <div class="form-group">
+          <label>Weight (kg):</label>
+          <input type="number" name="weight" placeholder="e.g. 65" required>
+        </div>
+
+        <div class="form-group">
+          <label>Activity Level:</label>
+          <select name="activity" required>
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Goal:</label>
+          <select name="goal" required>
+            <option value="weight_loss">Weight Loss</option>
+            <option value="muscle_gain">Muscle Gain</option>
+            <option value="maintain">Maintain</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Food Preference:</label>
+          <select name="preference" required>
+            <option>Veg</option>
+            <option>Non-Veg</option>
+            <option>Vegan</option>
+          </select>
+        </div>
+
+        <button type="submit">Generate My Plan 🚀</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>Made with ❤️ by Atharva & Team | PCCOE AIML</p>
+  </footer>
+</body>
 </html>
