@@ -25,7 +25,20 @@ def recommend():
     goal = request.form['goal']
     preference = request.form['preference']
 
-    # 3️⃣ Calculate daily calories using Mifflin–St Jeor
+    # 3️⃣ BMI calculation
+    height_m = height / 100
+    bmi = weight / (height_m ** 2)
+
+    if bmi < 18.5:
+        bmi_status = "Underweight"
+    elif 18.5 <= bmi < 25:
+        bmi_status = "Normal weight"
+    elif 25 <= bmi < 30:
+        bmi_status = "Overweight"
+    else:
+        bmi_status = "Obese"
+
+    # 4️⃣ Calorie calculation (Mifflin–St Jeor)
     if gender.lower() == 'male':
         bmr = 10 * weight + 6.25 * height - 5 * age + 5
     else:
@@ -44,17 +57,14 @@ def recommend():
     else:
         ai_goal = 'Maintain'
 
-    # 4️⃣ Filter by goal and preference
+    # 5️⃣ Filter AI recommendations
     recommendations = df[df['Goal_Label'] == ai_goal]
     if preference.lower() == 'veg':
         recommendations = recommendations[~recommendations['Dish Name'].str.contains('chicken|fish|egg|mutton|meat|prawn', case=False)]
     elif preference.lower() == 'non-veg':
         recommendations = recommendations[recommendations['Dish Name'].str.contains('chicken|fish|egg|mutton|meat|prawn', case=False)]
 
-    # Random sample
     selected_meals = recommendations.sample(n=3, replace=False) if not recommendations.empty else pd.DataFrame()
-
-    # Format for display
     meals = selected_meals[['Dish Name', 'Calories (kcal)', 'Protein (g)', 'Carbohydrates (g)', 'Fats (g)']].to_dict(orient='records')
 
     return render_template(
@@ -62,10 +72,12 @@ def recommend():
         calories=int(calories),
         preference=preference,
         goal=ai_goal,
+        bmi=round(bmi, 1),
+        bmi_status=bmi_status,
         meals=meals
     )
 
-# 5️⃣ AJAX route for "Show More" button
+# 6️⃣ AJAX route for "Show More Options"
 @app.route('/more_meals', methods=['POST'])
 def more_meals():
     goal = request.form['goal']
@@ -77,7 +89,6 @@ def more_meals():
     elif preference.lower() == 'non-veg':
         recommendations = recommendations[recommendations['Dish Name'].str.contains('chicken|fish|egg|mutton|meat|prawn', case=False)]
 
-    # Pick 3 random meals
     more_meals = recommendations.sample(n=3, replace=False)[['Dish Name', 'Calories (kcal)', 'Protein (g)', 'Carbohydrates (g)', 'Fats (g)']].to_dict(orient='records')
 
     return jsonify(more_meals)

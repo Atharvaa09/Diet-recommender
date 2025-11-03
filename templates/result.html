@@ -5,6 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Personalized Diet Plan</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    /* --- Extra styling for BMI section --- */
+    .bmi-section {
+      margin-bottom: 25px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .bmi-underweight { background-color: #85C1E9; } /* blue */
+    .bmi-normal { background-color: #82E0AA; } /* green */
+    .bmi-overweight { background-color: #F7DC6F; } /* yellow */
+    .bmi-obese { background-color: #F1948A; } /* red */
+  </style>
 </head>
 <body>
   <header>
@@ -14,31 +28,36 @@
 
   <main>
     <div class="result-card">
+
+      <!-- ✅ BMI Section -->
+      <div class="bmi-section 
+        {% if bmi_status == 'Underweight' %}bmi-underweight
+        {% elif bmi_status == 'Normal weight' %}bmi-normal
+        {% elif bmi_status == 'Overweight' %}bmi-overweight
+        {% else %}bmi-obese{% endif %}">
+        <h2>Body Mass Index (BMI)</h2>
+        <p class="highlight">{{ bmi }}</p>
+        <h3>Status: <span>{{ bmi_status }}</span></h3>
+      </div>
+
+      <!-- ✅ Calorie Section -->
       <h2>Daily Calorie Requirement</h2>
       <p class="highlight">{{ calories }} kcal</p>
 
-      <h3>Goal: <span>{{ goal }}</span></h3>
+      <!-- ✅ Food Preference -->
       <h3>Food Preference: <span>{{ preference }}</span></h3>
 
+      <!-- ✅ Recommended Meals -->
       <h2>Recommended Meals</h2>
-      <div id="mealList" class="meal-list">
+      <div class="meal-list">
         {% for meal in meals %}
-        <div class="meal-item">
-          <span class="meal-emoji">🍽️</span>
-          <div>
-            <p class="dish-name">{{ meal['Dish Name'] }}</p>
-            <p class="nutri-info">
-              🍎 {{ meal['Calories (kcal)'] }} kcal |
-              🥩 {{ meal['Protein (g)'] }} g protein |
-              🍚 {{ meal['Carbohydrates (g)'] }} g carbs |
-              🧈 {{ meal['Fats (g)'] }} g fat
-            </p>
+          <div class="meal-item">
+            <span class="meal-emoji">🍽️</span>
+            <p>{{ meal }}</p>
           </div>
-        </div>
         {% endfor %}
       </div>
 
-      <button id="moreBtn" class="back-btn">🔄 Show More Options</button>
       <a href="/" class="back-btn">← Go Back</a>
     </div>
   </main>
@@ -46,34 +65,5 @@
   <footer>
     <p>Made with ❤️ by Atharva & Team | PCCOE AIML</p>
   </footer>
-
-  <!-- JavaScript for Show More feature -->
-  <script>
-    const moreBtn = document.getElementById('moreBtn');
-    moreBtn.addEventListener('click', async () => {
-      const res = await fetch('/more_meals', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `goal={{ goal }}&preference={{ preference }}`
-      });
-      const meals = await res.json();
-
-      const mealList = document.getElementById('mealList');
-      mealList.innerHTML = meals.map(m => `
-        <div class="meal-item">
-          <span class="meal-emoji">🍽️</span>
-          <div>
-            <p class="dish-name">${m['Dish Name']}</p>
-            <p class="nutri-info">
-              🍎 ${m['Calories (kcal)']} kcal |
-              🥩 ${m['Protein (g)']} g protein |
-              🍚 ${m['Carbohydrates (g)']} g carbs |
-              🧈 ${m['Fats (g)']} g fat
-            </p>
-          </div>
-        </div>
-      `).join('');
-    });
-  </script>
 </body>
 </html>
