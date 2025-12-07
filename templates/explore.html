@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Foods</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+  <a class="brand" href="/" style="
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-right: auto;
+  ">NutriVision</a>
+
+  <a class="nav-item" href="/">Home</a>
+  <a class="nav-item" href="/about">About</a>
+  <a class="nav-item" href="/explore">Food Explorer</a>
+  <a class="nav-item" href="/tips">Tips</a>
+  <a class="nav-item" href="/contact">Contact</a>
+  <a class="nav-item" href="/login">Login</a>
+</nav>
+
+
+<header>
+  <h1>Explore Indian Foods</h1>
+</header>
+
+<main>
+  <div class="result-card">
+    <h2>Search By Goal</h2>
+    <form method="POST" action="/explore">
+      <select name="goal" required>
+        <option value="Weight Loss">Weight Loss</option>
+        <option value="Maintain">Maintain</option>
+        <option value="Muscle Gain">Muscle Gain</option>
+      </select>
+
+      <button>Show Foods</button>
+    </form>
+
+    {% if foods %}
+    <ul style="margin-top:20px; text-align:left;">
+      {% for food in foods %}
+      <li>{{ food }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</main>
+
+<footer>
+  <p>Made with ❤️ by Atharva & Baliram</p>
+</footer>
+
+</body>
+</html>

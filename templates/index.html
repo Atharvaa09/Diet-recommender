@@ -1,95 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Diet Recommender | Home</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diet Recommender</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <header>
-    <h1>🥗 Smart Diet Recommender</h1>
-    <p>AI-powered personalized meal planning for your health goals</p>
-  </header>
 
-  <main>
-    <div class="form-card enhanced fade-in">
-      <h2>Fill Your Details</h2>
-      <form id="dietForm" action="/recommend" method="POST">
-        <div class="form-group">
-          <label>Age:</label>
-          <input type="number" name="age" placeholder="Enter your age" required>
-        </div>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="brand" href="/" style="
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-right: auto;
+  ">NutriVision</a>
 
-        <div class="form-group">
-          <label>Gender:</label>
-          <select name="gender" required>
-            <option>Male</option>
-            <option>Female</option>
-          </select>
-        </div>
+  <a class="nav-item" href="/">Home</a>
+  <a class="nav-item" href="/about">About</a>
+  <a class="nav-item" href="/explore">Food Explorer</a>
+  <a class="nav-item" href="/tips">Tips</a>
+  <a class="nav-item" href="/contact">Contact</a>
+  <a class="nav-item" href="/login">Login</a>
+</nav>
 
-        <div class="form-group">
-          <label>Height (cm):</label>
-          <input type="number" name="height" placeholder="e.g. 170" required>
-        </div>
 
-        <div class="form-group">
-          <label>Weight (kg):</label>
-          <input type="number" name="weight" placeholder="e.g. 65" required>
-        </div>
+<header>
+  <h1>🥗 Personalized Diet Generator</h1>
+  <p>Your health goals converted into meals.</p>
+</header>
 
-        <div class="form-group">
-          <label>Activity Level:</label>
-          <select name="activity" required>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </div>
+<main>
+  <div class="form-card">
+    <h2>Enter Your Details</h2>
+    <form action="/recommend" method="POST">
 
-        <div class="form-group">
-          <label>Goal:</label>
-          <select name="goal" required>
-            <option value="weight_loss">Weight Loss</option>
-            <option value="muscle_gain">Muscle Gain</option>
-            <option value="maintain">Maintain</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label>Age</label>
+        <input type="number" name="age" required>
+      </div>
 
-        <div class="form-group">
-          <label>Food Preference:</label>
-          <select name="preference" required>
-            <option>Veg</option>
-            <option>Non-Veg</option>
-            <option>Vegan</option>
-            <option>Mixed (Veg + Non-Veg)</option>
-          </select>
-        </div>
+      <div class="form-group">
+        <label>Gender</label>
+        <select name="gender" required>
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
 
-        <button type="submit">Generate My Plan 🚀</button>
-      </form>
-    </div>
-  </main>
+      <div class="form-group">
+        <label>Height (cm)</label>
+        <input type="number" name="height" required>
+      </div>
 
-  <footer>
-    <p>Made with ❤️ by Atharva & Team | PCCOE AIML</p>
-  </footer>
+      <div class="form-group">
+        <label>Weight (kg)</label>
+        <input type="number" name="weight" required>
+      </div>
 
-  <!-- Loading overlay -->
-  <div id="loadingOverlay">
-    <div class="spinner"></div>
-    <p>🤖 Analyzing your details... Please wait</p>
+      <div class="form-group">
+        <label>Activity Level</label>
+        <select name="activity" required>
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Goal</label>
+        <select name="goal" required>
+          <option value="weight_loss">Weight Loss</option>
+          <option value="maintain">Maintain</option>
+          <option value="muscle_gain">Muscle Gain</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Food Preference</label>
+        <select name="preference" required>
+          <option value="veg">Veg</option>
+          <option value="non-veg">Non-Veg</option>
+        </select>
+      </div>
+
+      <button type="submit">Generate Plan</button>
+    </form>
   </div>
+</main>
 
-  <!-- JavaScript for AI loading animation -->
-  <script>
-    const form = document.getElementById('dietForm');
-    const loadingOverlay = document.getElementById('loadingOverlay');
+<footer>
+  <p>Made with ❤️ by Atharva & Baliram</p>
+</footer>
 
-    form.addEventListener('submit', function() {
-      loadingOverlay.style.display = 'flex';
-    });
-  </script>
 </body>
 </html>

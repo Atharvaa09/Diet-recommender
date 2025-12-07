@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a class="brand" href="/" style="
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-right: auto;
+  ">NutriVision</a>
+
+  <a class="nav-item" href="/">Home</a>
+  <a class="nav-item" href="/about">About</a>
+  <a class="nav-item" href="/explore">Food Explorer</a>
+  <a class="nav-item" href="/tips">Tips</a>
+  <a class="nav-item" href="/contact">Contact</a>
+  <a class="nav-item" href="/login">Login</a>
+</nav>
+
+
+<header>
+  <h1>Login Page🔐</h1>
+</header>
+
+<main>
+  <div class="form-card">
+    <h2>Welcome Back</h2>
+
+    <!-- Redirects to home page when Login button is clicked -->
+    <form onsubmit="event.preventDefault(); window.location.href='/'">
+
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="Enter your email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password" required>
+      </div>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <p style="text-align:center; margin-top:10px;">
+      
+    </p>
+  </div>
+</main>
+
+<footer>
+  <p>Made with ❤️ by Atharva & Baliram</p>
+</footer>
+
+</body>
+</html>

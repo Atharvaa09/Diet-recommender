@@ -7,6 +7,33 @@ body {
   color: #333;
 }
 
+/* ---------- NAVBAR ---------- */
+.navbar {
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 15px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #2c3e50;
+  font-weight: 600;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.nav-item:hover {
+  color: #0072ff;
+  transform: translateY(-2px);
+}
+
+/* ---------- HEADER ---------- */
 header {
   text-align: center;
   padding: 40px 20px 10px;
@@ -23,14 +50,17 @@ header p {
   color: #555;
 }
 
+/* ---------- MAIN ---------- */
+/* Force centering (fix navbar push) */
 main {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 70vh;
-  padding: 20px; /* Prevents overflow on small screens */
+  width: 100%;
 }
 
+
+/* ---------- FOOTER ---------- */
 footer {
   text-align: center;
   padding: 15px;
@@ -40,13 +70,13 @@ footer {
   box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
-/* ---------- INDEX PAGE ---------- */
+/* ---------- INDEX PAGE FORM ---------- */
 .form-card {
   background-color: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  width: 320px;           /* slimmer and balanced */
+  width: 320px;
   max-width: 90%;
   text-align: left;
   margin: 30px auto;
@@ -74,7 +104,7 @@ footer {
 .form-group input,
 .form-group select {
   width: 100%;
-  max-width: 260px;     /* keeps it neat */
+  max-width: 260px;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
@@ -109,8 +139,8 @@ button:hover {
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-  width: 400px;
-  max-width: 90%;
+  width: 420px;
+  max-width: 95%;
   text-align: center;
   margin: 40px auto;
 }
@@ -157,9 +187,14 @@ button:hover {
   margin-right: 10px;
 }
 
+.nutri-info {
+  font-size: 13px;
+  color: #333;
+}
+
 .back-btn {
   display: inline-block;
-  margin-top: 25px;
+  margin-top: 20px;
   padding: 10px 20px;
   background-color: #6a5acd;
   color: white;
@@ -172,36 +207,133 @@ button:hover {
   background-color: #5848c2;
 }
 
-/* ---------- AI Loading Overlay ---------- */
-#loadingOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* ---------- RESPONSIVE ---------- */
+@media(max-width: 500px) {
+  .form-card {
+    width: 90%;
+  }
+  .result-card {
+    width: 92%;
+  }
+  .navbar {
+    gap: 15px;
+    font-size: 14px;
+  }
+}
+
+.brand {
+  font-size: 22px;
+  font-weight: 800;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
   width: 100%;
-  height: 100%;
-  background: rgba(255,255,255,0.9);
-  backdrop-filter: blur(6px);
-  display: none;
-  flex-direction: column;
-  justify-content: center;
+  background: #4a69bd;
+  padding: 15px 25px;
+  display: flex;
   align-items: center;
-  z-index: 999;
-  color: #333;
-  font-size: 1.2rem;
+  gap: 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+.navbar .brand {
+  font-size: 24px;
+  font-weight: 900;
+  color: white;
+  margin-right: auto;
+  text-decoration: none;
+}
+
+.navbar .nav-item {
+  color: white;
   font-weight: 600;
+  text-decoration: none;
+  font-size: 16px;
 }
 
-.spinner {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #3498db;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 15px;
+.navbar .nav-item:hover {
+  text-decoration: underline;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Fix page shifting caused by navbar */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main, header, .form-card, .result-card {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- LAYOUT RESET & CENTERING FIX (paste at end of style.css) ---------- */
+
+/* Make sure body uses full width but page content is centered */
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: block;
+}
+
+/* A single central container for all page content.
+   Ensure your pages wrap main content inside this container (most pages already have it). */
+.page-container {
+  max-width: 980px;     /* change to 900/1000 if you want wider */
+  width: 94%;
+  margin: 0 auto;       /* this centers the content */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Make main behave normally but keep its inner content centered */
+main {
+  display: block;       /* revert any previous flex that pushed content */
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Keep header and footer content centered inside .page-container */
+header, footer {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Ensure form-card and result-card are centered within the .page-container */
+.form-card, .result-card {
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+/* If navbar is using flex and pushing items, make sure the brand and nav-items don't shift content */
+.navbar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 24px;
+}
+
+/* Make nav-items not affect content width */
+.navbar .brand {
+  margin-right: 20px;
+}
+.navbar .nav-item {
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+/* Small screens adjustments */
+@media (max-width: 800px) {
+  .page-container { width: 96%; padding: 12px; }
+  .navbar { padding: 10px 12px; gap: 8px; }
 }
